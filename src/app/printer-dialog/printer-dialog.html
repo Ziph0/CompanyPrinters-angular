@@ -1,0 +1,77 @@
+<div class="dialog-header">
+  <h2>{{ isEditMode ? 'Edit Printer' : 'Add Printer' }}</h2>
+  <button mat-icon-button class="close-btn" (click)="close()"><mat-icon>close</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+  
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Printer Name</mat-label>
+    <input matInput required [(ngModel)]="data.printerName" #printerNameModel="ngModel" />
+    <mat-error *ngIf="printerNameModel.errors?.['required'] && printerNameModel.touched">
+      Printer Name is required
+    </mat-error>
+  </mat-form-field>
+
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Make</mat-label>
+  <mat-select 
+    required 
+    name="makeID" 
+    [(ngModel)]="data.makeID" 
+    #makeModel="ngModel">
+    <mat-option *ngFor="let make of makes" [value]="make.printerMakeId">
+      {{ make.printerMakeName }}
+    </mat-option>
+  </mat-select>
+  
+  <mat-error *ngIf="makeModel.hasError('required')">
+    Please select a printer make
+  </mat-error>
+</mat-form-field>
+
+ 
+  <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Folder</mat-label>
+  <input matInput required 
+         pattern="^(C:\\FTPArea\\formidable|\\\\ctdzlp01\\formidable)\\P00\\[A-Za-z0-9]+\\(in|out)$"
+         [(ngModel)]="data.folderToMonitor" 
+         #folderModel="ngModel" />
+  
+  <mat-error *ngIf="folderModel.errors?.['required']">Folder is required</mat-error>
+  <mat-error *ngIf="folderModel.errors?.['pattern']">Invalid path format (e.g., \\ctdzlp01\formidable\P00\Testing\in)</mat-error>
+</mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Output Type</mat-label>
+  <input matInput
+         required
+         [(ngModel)]="data.outputType"
+         #outputTypeModel="ngModel"
+         pattern="PDF|TXT|DOCX|FTP" />
+  <mat-error *ngIf="outputTypeModel.errors?.['required'] && outputTypeModel.touched">
+    Output Type is required
+  </mat-error>
+  <mat-error *ngIf="outputTypeModel.errors?.['pattern'] && outputTypeModel.touched">
+    Output Type must be PDF, TXT, DOCX, or FTP
+  </mat-error>
+</mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+  <mat-label>File Output</mat-label>
+  <input matInput required 
+         pattern="^(C:\\FTPArea\\formidable|\\\\ctdzlp01\\formidable)\\P00\\[A-Za-z0-9]+\\(in|out)$"
+         [(ngModel)]="data.fileOutput" 
+         #fileOutputModel="ngModel" />
+  
+  <mat-error *ngIf="fileOutputModel.errors?.['required']">File Output is required</mat-error>
+  <mat-error *ngIf="fileOutputModel.errors?.['pattern']">Invalid path format (e.g., \\ctdzlp01\formidable\P00\Testing\out)</mat-error>
+</mat-form-field>
+
+  <mat-checkbox [(ngModel)]="data.active">Active</mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button *ngIf="!isEditMode" mat-button (click)="clearForm()">Clear</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

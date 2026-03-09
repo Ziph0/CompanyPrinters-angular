@@ -1,0 +1,12 @@
+<app-menu *ngIf="showMenu()"></app-menu>
+
+<app-loading-spinner
+  *ngIf="loadingService.loading$ | async"
+  [overlay]="true"
+  [size]="50"
+  color="#10b981">
+</app-loading-spinner>
+
+<main class="app-container">
+  <router-outlet></router-outlet>
+</main>

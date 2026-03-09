@@ -1,0 +1,42 @@
+<mat-toolbar class="top-bar">
+
+  
+  <div class="brand">
+    <mat-icon>print</mat-icon>
+    <span>Company Printers</span>
+  </div>
+
+
+  <span class="spacer"></span>
+
+
+  <div class="right-actions">
+    <div class="nav-container">
+  <a mat-button 
+     routerLink="/printers" 
+     [routerLinkActive]="auth.hasRole(2) ? 'active-nav' : ''" 
+     class="nav-button">
+    Printers
+  </a>
+
+  <a mat-button *ngIf="auth.hasRole(2)" 
+     routerLink="/users" 
+     routerLinkActive="active-nav" 
+     class="nav-button">
+    Users
+  </a>
+
+  <a mat-button *ngIf="auth.hasRole(2)" 
+     routerLink="/designations" 
+     routerLinkActive="active-nav" 
+     class="nav-button">
+    Designations
+  </a>
+</div>
+
+    <button mat-raised-button class="logout-button" (click)="logout()">
+      Logout
+    </button>
+  </div>
+
+</mat-toolbar>

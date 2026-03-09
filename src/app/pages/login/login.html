@@ -1,0 +1,56 @@
+
+
+<div class="login-container">
+  <mat-card class="login-card">
+    
+   <div class="login-header">
+  <h1>Company Printers </h1>
+</div>
+
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="submitted && f['username'].errors">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput
+               [type]="showPassword ? 'text' : 'password'"
+               formControlName="password"
+               (keydown)="checkCapsLock($event)"
+               (keyup)="checkCapsLock($event)">
+        <button mat-icon-button
+                matSuffix
+                type="button"
+                (click)="showPassword = !showPassword">
+          <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="submitted && f['password'].errors">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+    
+      <div *ngIf="isCapsOn" class="caps-warning">
+        <mat-icon color="warn">warning</mat-icon> Caps Lock is ON
+      </div>
+
+     
+      <button mat-raised-button color="primary" type="submit" class="full-width">
+        Login
+      </button>
+
+      
+      <div *ngIf="errorMessage" class="error-label">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </mat-card>
+</div>

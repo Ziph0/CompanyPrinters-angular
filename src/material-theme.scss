@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$custom-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+  ),
+  typography: (
+    brand-family: 'Inter, Segoe UI, sans-serif',
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+// ✅ Emit styles globally (not inside html)
+@include mat.all-component-themes($custom-theme);
+
+// Optional: token overrides
+:root {
+  --mdc-shape-small: 8px;
+  --mdc-shape-medium: 8px;
+  --mdc-shape-large: 16px;
+
+  --mdc-filled-button-container-color: #1e293b;
+  --mdc-filled-button-label-text-color: #ffffff;
+}

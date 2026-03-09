@@ -1,0 +1,91 @@
+<div class="dialog-header">
+  <h2>{{ isEditMode ? 'Edit User' : 'Add User' }}</h2>
+  <button mat-icon-button class="close-btn" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+
+  <mat-form-field class="full-width" appearance="outline">
+  <mat-label>First Name</mat-label>
+  <input matInput required [(ngModel)]="data.firstName" #firstNameModel="ngModel">
+  <mat-error *ngIf="firstNameModel.invalid && firstNameModel.touched">First Name is required</mat-error>
+</mat-form-field>
+
+<mat-form-field class="full-width" appearance="outline">
+  <mat-label>Last Name</mat-label>
+  <input matInput required [(ngModel)]="data.lastName" #lastNameModel="ngModel">
+  <mat-error *ngIf="lastNameModel.invalid && lastNameModel.touched">Last Name is required</mat-error>
+</mat-form-field>
+
+<mat-form-field class="full-width" appearance="outline">
+  <mat-label>Designation</mat-label>
+  <mat-select required [(ngModel)]="data.designationId" #designationModel="ngModel">
+    <mat-option *ngFor="let d of designations" [value]="d.designationId">{{ d.designationName }}</mat-option>
+  </mat-select>
+  <mat-error *ngIf="designationModel.invalid && designationModel.touched">Designation is required</mat-error>
+</mat-form-field>
+
+<mat-form-field class="full-width" appearance="outline">
+  <mat-label>Email</mat-label>
+  <input matInput
+         required
+         [(ngModel)]="data.email"
+         name="email"
+         #emailModel="ngModel"
+         pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"> <mat-error *ngIf="emailModel.invalid && emailModel.touched">
+    <ng-container *ngIf="emailModel.errors?.['required']">Email is required</ng-container>
+    <ng-container *ngIf="emailModel.errors?.['pattern']">Please enter a full email address (e.g. name@domain.com)</ng-container>
+  </mat-error>
+</mat-form-field>
+
+
+<mat-form-field class="full-width" appearance="outline">
+  <mat-label>Username</mat-label>
+  <input matInput required [(ngModel)]="data.username" #usernameModel="ngModel">
+  <mat-error *ngIf="usernameModel.invalid && usernameModel.touched">Username is required</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Password</mat-label>
+  <input matInput
+         [(ngModel)]="data.password"
+         name="userPassword"
+         #passwordModel="ngModel"
+         required
+         [readonly]="isEditMode"
+         [type]="isEditMode ? 'text' : 'password'"
+         appPasswordValidator
+         (ngModelChange)="confirmModel?.control?.updateValueAndValidity()"
+         [ngClass]="{'edit-mode-input': isEditMode}">
+         
+  <mat-error *ngIf="passwordModel.errors?.['required']">
+    Password is required
+  </mat-error>
+  <mat-error *ngIf="passwordModel.errors?.['invalidPassword']">
+    Password must be at least 6 characters and contain a special character
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field *ngIf="!isEditMode" appearance="outline" class="full-width">
+  <mat-label>Confirm Password</mat-label>
+  <input matInput 
+         [(ngModel)]="confirmPassword" 
+         name="confirmPassword"
+         #confirmModel="ngModel" 
+         required 
+         type="password" 
+         [appConfirmPasswordValidator]="data.password!">
+  <mat-error *ngIf="confirmModel.errors?.['required']">Confirm Password is required</mat-error>
+  <mat-error *ngIf="confirmModel.errors?.['passwordMismatch']">Passwords do not match</mat-error>
+</mat-form-field>
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button *ngIf="!data.isEditMode" mat-button (click)="clearForm()">Clear</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,110 @@
+<h2 class="page-title">User Management</h2>
+<div 
+  *ngIf="topMessage" 
+  class="top-message" 
+  [ngClass]="topMessageType === 'success' ? 'top-message-success' : 'top-message-error'">
+  {{ topMessage }}
+</div>
+
+<div class="search-panel">
+
+  <div class="search-row">
+  <label for="designation">Designation</label>
+  
+<mat-form-field appearance="outline" class="full-width">
+   <mat-select [(ngModel)]="selectedDesignation" (selectionChange)="filterByDesignation()">
+        <mat-option *ngFor="let d of designations" [value]="d.designationId">
+          {{ d.designationName }}
+        </mat-option>
+      </mat-select>
+</mat-form-field>
+  </div>
+
+  
+  <div class="button-row" >
+   <button mat-flat-button color="primary" (click)="addUser()">Add User</button>
+    <button mat-flat-button color="primary" (click)="clearFilter()">Clear</button>
+
+  </div>
+
+</div>
+<div class="grid-container">
+ 
+<div class="grid-search-wrapper">
+  <mat-form-field appearance="outline" class="grid-search-input">
+    <input matInput placeholder="Search ..." [(ngModel)]="searchText" (input)="applyFilter()">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-grid">
+
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <td mat-cell *matCellDef="let user"> {{user.firstName}} </td>
+  </ng-container>
+
+  
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="designationName">
+    <th mat-header-cell *matHeaderCellDef> Designation </th>
+    <td mat-cell *matCellDef="let user"> {{user.designationName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+  </ng-container>
+
+  
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef> Username </th>
+    <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef> Password </th>
+    <td mat-cell *matCellDef="let user"> {{user.password}} </td>
+  </ng-container>
+
+<ng-container matColumnDef="edit">
+  <th mat-header-cell *matHeaderCellDef style="width: 60px;">Edit</th>
+  <td mat-cell *matCellDef="let user">
+    <button mat-icon-button color="primary" (click)="edit(user)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </td>
+</ng-container>
+
+
+<ng-container matColumnDef="delete">
+  <th mat-header-cell *matHeaderCellDef style="width: 60px;">Delete</th>
+  <td mat-cell *matCellDef="let user">
+    <button mat-icon-button color="warn" (click)="delete(user)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </td>
+</ng-container>
+ 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+ <tr mat-row 
+    *matRowDef="let row; columns: displayedColumns;"
+    [class.editing-row]="editingId == row.userId">
+</tr>
+</table>
+
+<div class="no-data" *ngIf="dataSource.filteredData.length === 0">
+    No users found.
+  </div>
+ <mat-paginator
+    class="my-paginator"
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+    showFirstLastButtons>
+  </mat-paginator>

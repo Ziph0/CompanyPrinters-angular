@@ -1,0 +1,54 @@
+.dialog-header {
+  position: relative;         
+  display: flex;
+  justify-content: center;    
+  align-items: center;        
+  padding: 16px 0;            
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.dialog-header .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+mat-dialog-actions button[color="primary"],
+mat-dialog-actions .mat-mdc-unelevated-button.mat-primary,
+mat-dialog-actions .mat-mdc-flat-button.mat-primary {
+  background-color: #1e293b !important;
+  color: white !important;
+}
+
+mat-dialog-actions button:not([color="primary"]) {
+  color: #64748b !important; 
+}
+
+mat-dialog-actions button[color="primary"]:hover {
+  background-color: #334155 !important;
+}
+
+.mat-dialog-content {
+  overflow: hidden;        
+  padding: 0 24px;          
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: #1e293b !important;
+  border-width: 2px !important;
+}
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: #1e293b !important;
+}
+::ng-deep .mat-mdc-form-field.mat-focused input {
+  caret-color: #1e293b !important;
+}

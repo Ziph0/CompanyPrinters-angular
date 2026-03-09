@@ -1,0 +1,28 @@
+
+<div class="dialog-header">
+  <h2>{{ data.designationId ? 'Edit Designation' : 'Add Designation' }}</h2>
+  <button mat-icon-button class="close-btn" (click)="close()"><mat-icon>close</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+  <mat-form-field class="full-width" appearance="outline"
+                  [ngClass]="{'error-input': designationModel.invalid && designationModel.touched}">
+    <mat-label>Designation Name</mat-label>
+    <input matInput
+           [(ngModel)]="data.designationName"
+           #designationModel="ngModel"
+           required
+           (input)="onDesignationInput(designationModel)">
+    
+    <mat-error *ngIf="designationModel.errors?.['required']">
+      Designation name is required
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button *ngIf="!data.isEdit" mat-button (click)="clear(designationModel)">Clear</button>
+  
+  <button mat-flat-button color="primary" (click)="onSave(designationModel)">Save</button>
+</mat-dialog-actions>
