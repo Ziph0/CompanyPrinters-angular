@@ -12,7 +12,7 @@ A modern administrative dashboard built with **Angular** to manage enterprise pr
 * **Administrative Dashboard:** Secure login and system overview.
 * **Printer Management:** Full CRUD (Create, Read, Update, Delete) operations for network printers.
 * **User Management:** Interface for managing system users and roles.
-* **Responsive Design:** Fully optimized for desktop and mobile viewing using Tailwind CSS.
+* **Responsive Design:** Fully optimized for desktop and mobile viewing using CSS.
 * **Mock Integration:** Includes a mock service layer to allow the frontend to function for demonstration purposes without a live API.
 
 
