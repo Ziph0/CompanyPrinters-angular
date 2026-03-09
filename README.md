@@ -1,59 +1,27 @@
-# CompanyPrinters
+# CompanyPrinters Management System (Angular Frontend)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+A modern administrative dashboard built with **Angular** to manage enterprise printing infrastructure. This project demonstrates a transition from legacy systems to a modern, responsive Single Page Application (SPA).
 
-## Development server
+## Tech Stack
+* **Framework:** Angular 21
+* **UI Components:** Angular Material
+* **Styling:**  CSS / SCSS
+* **Deployment:** Netlify
 
-To start a local development server, run:
+## Key Features
+* **Administrative Dashboard:** Secure login and system overview.
+* **Printer Management:** Full CRUD (Create, Read, Update, Delete) operations for network printers.
+* **User Management:** Interface for managing system users and roles.
+* **Responsive Design:** Fully optimized for desktop and mobile viewing using Tailwind CSS.
+* **Mock Integration:** Includes a mock service layer to allow the frontend to function for demonstration purposes without a live API.
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## Development & Setup
+1. Clone the repo: `git clone https://github.com/Ziph0/CompanyPrinters-angular.git`
+2. Install dependencies: `npm install`
+3. Run locally: `ng serve`
+4. Build for production: `ng build`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Live Demo
+The application is hosted live on Netlify: [View Live Demo](https://company-printers-ziph0.netlify.app/)
