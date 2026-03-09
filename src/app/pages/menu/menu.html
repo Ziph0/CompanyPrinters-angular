@@ -14,19 +14,19 @@
     <div class="nav-container">
   <a mat-button 
      routerLink="/printers" 
-     [routerLinkActive]="auth.hasRole(2) ? 'active-nav' : ''" 
+     routerLinkActive="active-nav" 
      class="nav-button">
     Printers
   </a>
 
-  <a mat-button *ngIf="auth.hasRole(2)" 
+  <a mat-button 
      routerLink="/users" 
      routerLinkActive="active-nav" 
      class="nav-button">
     Users
   </a>
 
-  <a mat-button *ngIf="auth.hasRole(2)" 
+  <a mat-button 
      routerLink="/designations" 
      routerLinkActive="active-nav" 
      class="nav-button">

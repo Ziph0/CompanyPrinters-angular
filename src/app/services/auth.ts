@@ -62,7 +62,7 @@ export class Auth {
  
   const mockUser = { 
     username: credentials.username, 
-    designationId: 1, 
+    designationId: 2, 
     firstName: 'Demo',
     lastName: 'User'
   };

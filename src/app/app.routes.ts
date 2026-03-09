@@ -8,9 +8,12 @@ import { Designations } from './pages/designations/designations';
 
 export const routes: Routes = [
   { path: 'login', component: Login },
-  { path: 'printers', component: Printers},
-  {path:'menu', component: Menu},
-  {path: "users", component:Users},
-  {path: "designations", component:Designations},
-  { path: '', redirectTo: 'printers', pathMatch: 'full' },
+  { path: 'printers', component: Printers },
+  { path: 'menu', component: Menu },
+  { path: 'users', component: Users },
+  { path: 'designations', component: Designations },
+ 
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, 
+ 
+  { path: '**', redirectTo: 'login' }
 ];
