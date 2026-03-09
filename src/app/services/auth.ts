@@ -87,7 +87,7 @@ export class Auth {
   logout() {
     sessionStorage.clear();
   }
-getPrinters(): Observable<Printer[]> {
+getPrinters(options?: any): Observable<Printer[]> {
   return of([
     { 
       engenPrintersID: 1, 
@@ -95,7 +95,7 @@ getPrinters(): Observable<Printer[]> {
       folderToMonitor: 'C:\\FTPArea\\formidable\\P00\\EP8P\\in', 
       outputType: 'File Output', 
       fileOutput: 'C:\\FTPArea\\formidable\\P00\\EP8P\\out', 
-      active: true, // Changed from 1 to true
+      active: true, 
       printerMakeID: 1,
       makeName: 'Canon',
       createdTimeStamp: new Date()
@@ -106,7 +106,7 @@ getPrinters(): Observable<Printer[]> {
       folderToMonitor: '\\\\ctdzlp01\\formidable\\P00\\BM2P\\in', 
       outputType: 'FTP Output', 
       fileOutput: '\\\\ctdzlp01\\formidable\\P00\\BM2P\\out', 
-      active: true, // Changed from 1 to true
+      active: true,
       printerMakeID: 2, 
       makeName: 'Samsung',
       createdTimeStamp: new Date()
@@ -125,7 +125,7 @@ getPrinters(): Observable<Printer[]> {
   ]);
 }
 
- getUsers(): Observable<User[]> {
+ getUsers(options?: any): Observable<User[]> {
   return of([
     { 
       userID: 1, 
@@ -159,23 +159,24 @@ getPrinters(): Observable<Printer[]> {
     }
   ]);
 }
-getDesignations(options: unknown): Observable<Designation[]> {
+getDesignations(options?: any): Observable<Designation[]> {
   return of([
     { designationId: 1, designationName: 'Manager' },
     { designationId: 2, designationName: 'System Administrator' },
     { designationId: 3, designationName: 'Level 1 Employee' }
   ]);
 }
- getMakes(): Observable<Makes[]> {
+ getMakes(options?: any): Observable<Makes[]> {
   return of([
     { printerMakeId: 1, printerMakeName: 'Canon' },
     { printerMakeId: 2, printerMakeName: 'Samsung' },
     { printerMakeId: 3, printerMakeName: 'Epson' }
   ]);
 }
- getPrintersFiltered(makeId?: number) {
-    return this.getPrinters(); 
-  }
+ 
+getPrintersFiltered(arg1?: any, arg2?: any, arg3?: any): Observable<Printer[]> {
+  return this.getPrinters(); 
+}
 
   getUsersFiltered(designationId?: number): Observable<User[]> {
     return this.getUsers();
