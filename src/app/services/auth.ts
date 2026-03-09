@@ -58,13 +58,24 @@ export class Auth {
 
   constructor(private http: HttpClient) {}
 
- login(credentials: any) {
-  
-  const mockUser = { username: credentials.username, token: 'fake-jwt-token' };
-  localStorage.setItem('user', JSON.stringify(mockUser)); 
-  return of(mockUser); 
-}
+ login(credentials: any): Observable<any> {
+ 
+  const mockUser = { 
+    username: credentials.username, 
+    designationId: 1, 
+    firstName: 'Demo',
+    lastName: 'User'
+  };
 
+  sessionStorage.setItem('designationId', mockUser.designationId.toString());
+  sessionStorage.setItem('user', JSON.stringify(mockUser)); 
+
+  return of({ 
+    result: true, 
+    message: 'Login Successful', 
+    data: mockUser 
+  }); 
+}
   getRole(): number {
     return Number(sessionStorage.getItem('designationId'));
   }
@@ -155,8 +166,12 @@ getDesignations(options: unknown): Observable<Designation[]> {
     { designationId: 3, designationName: 'Level 1 Employee' }
   ]);
 }
- getMakes(options: { headers?: any } = {}): Observable<Makes[]> {
-  return this.http.get<Makes[]>(`${this.apiUrl}/makes`, options);
+ getMakes(): Observable<Makes[]> {
+  return of([
+    { printerMakeId: 1, printerMakeName: 'Canon' },
+    { printerMakeId: 2, printerMakeName: 'Samsung' },
+    { printerMakeId: 3, printerMakeName: 'Epson' }
+  ]);
 }
  getPrintersFiltered(makeId?: number) {
     return this.getPrinters(); 
@@ -166,41 +181,40 @@ getDesignations(options: unknown): Observable<Designation[]> {
     return this.getUsers();
   }
 
-
- addPrinter(printer: Printer) {
-    return this.http.post<{ success: boolean; message: string }>(this.apiUrl, printer);
-  }
-
-  updatePrinter(id: number, printer: Printer) {
-    return this.http.put<{ success: boolean; message: string }>(`${this.apiUrl}/${id}`, printer);
-  }
-deletePrinter(id: number) {
-  return this.http.delete(`${this.apiUrl}/printer/${id}`, { responseType: 'text' });
-}
-updateUser(id: number, user: User) {
-  return this.http.put(`${this.apiUrl}/users/${id}`, user, { responseType: 'text' });
+addPrinter(printer: Printer): Observable<any> {
+  return of({ success: true, message: 'Printer added successfully (Demo Mode)' });
 }
 
-addUser(user: User) {
-  return this.http.post(`${this.apiUrl}/users`, user, { responseType: 'text' });
+updatePrinter(id: number, printer: Printer): Observable<any> {
+  return of({ success: true, message: 'Printer updated successfully (Demo Mode)' });
 }
 
-deleteUser(userId: number) {
-    return this.http.delete(`${this.apiUrl}/user/${userId}`, { responseType: 'text' });
+deletePrinter(id: number): Observable<string> {
+  return of('Printer deleted successfully (Demo Mode)');
 }
 
-
-
-addDesignation(designation: Designation) {
-  return this.http.post(`${this.apiUrl}/designation`, designation, { responseType: 'text' });
+addUser(user: User): Observable<string> {
+  return of('User added successfully (Demo Mode)');
 }
 
-updateDesignation(designation: Designation) {
-  return this.http.put(`${this.apiUrl}/designation/${designation.designationId}`, designation, { responseType: 'text' });
+updateUser(id: number, user: User): Observable<string> {
+  return of('User updated successfully (Demo Mode)');
 }
 
-deleteDesignation(designationId: number) {
-    return this.http.delete(`${this.apiUrl}/designation/${designationId}`, { responseType: 'text' });
+deleteUser(userId: number): Observable<string> {
+  return of('User deleted successfully (Demo Mode)');
+}
+
+addDesignation(designation: Designation): Observable<string> {
+  return of('Designation added successfully (Demo Mode)');
+}
+
+updateDesignation(designation: Designation): Observable<string> {
+  return of('Designation updated (Demo Mode)');
+}
+
+deleteDesignation(designationId: number): Observable<string> {
+  return of('Designation deleted (Demo Mode)');
 }
 
 getCurrentUser(): Observable<User> {

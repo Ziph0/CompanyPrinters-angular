@@ -68,19 +68,21 @@ export class Login {
   const start = Date.now();
 
   this.auth.login(this.loginForm.value).subscribe({
-    next: (res: any) => {
+  next: (res: any) => {
       const elapsed = Date.now() - start;
       const minTime = 400; 
       const delay = Math.max(minTime - elapsed, 0);
 
       setTimeout(() => {
-        localStorage.setItem('username', res.username);
-        localStorage.setItem('userId', res.userId);
-        localStorage.setItem('designationId', res.designationId);
+      const userData = res.data; 
 
-        this.isLoading = false;
-        this.cdr.detectChanges(); 
-        this.router.navigate(['/printers']);
+      localStorage.setItem('username', userData.username);
+      localStorage.setItem('designationId', userData.designationId.toString());
+      localStorage.setItem('userId', '1'); 
+
+      this.isLoading = false;
+      this.cdr.detectChanges(); 
+      this.router.navigate(['/printers']);
       }, delay);
     },
     error: (err: any) => {
