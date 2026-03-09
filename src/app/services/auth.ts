@@ -148,7 +148,7 @@ getPrinters(): Observable<Printer[]> {
     }
   ]);
 }
-getDesignations(): Observable<Designation[]> {
+getDesignations(options: unknown): Observable<Designation[]> {
   return of([
     { designationId: 1, designationName: 'Manager' },
     { designationId: 2, designationName: 'System Administrator' },
@@ -209,7 +209,7 @@ getCurrentUser(): Observable<User> {
  
   if (!id) return of({ designationId: 0, designationName: '' } as User);
 
-  return this.getDesignations().pipe(
+  return this.getDesignations({}).pipe(
     map(designations => {
       const match = designations.find(d => d.designationId === id);
       return {
